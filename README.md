@@ -1,2 +1,1 @@
-# SecondChances
-Acumatica Hackathon - Second Chances 
+# 2022-Team-Alpha
