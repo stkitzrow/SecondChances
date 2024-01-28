@@ -66,7 +66,6 @@ namespace PX.Objects.SecondChances {
 
         #region CustomerID
         public abstract class customerID : BqlInt.Field<customerID> { }
-        [PXDefault]
         [Customer(
             typeof(Search<BAccountR.bAccountID, Where<True, Equal<True>>>), // TODO: remove fake Where after AC-101187
             Visibility = PXUIVisibility.SelectorVisible,
@@ -86,7 +85,7 @@ namespace PX.Objects.SecondChances {
                 And<MatchWithBranch<CRLocation.cBranchID>>>>>,
             Search<CRLocation.locationID,
             Where<CRLocation.bAccountID, Equal<Current<customerID>>,
-            And<CRLocation.isActive, Equal<True>, And<MatchWithBranch<CRLocation.cBranchID>>>>>>))]
+            And<CRLocation.isActive, Equal<True>, And<MatchWithBranch<CRLocation.cBranchID>>>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual int? CustomerLocationID { get; set; }
         #endregion
 
