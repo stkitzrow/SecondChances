@@ -252,7 +252,7 @@ namespace PX.Objects.SecondChances {
         public abstract class status : BqlString.Field<status> { }
         [PXUIField(DisplayName = "Status")]
         [DocumentStatus.List]
-        [PXDefault("N")]
+        [PXDefault(DocumentStatus._New)]
         [PXDBString(1, IsFixed = true)]
         public virtual string Status { get; set; }
         #endregion
