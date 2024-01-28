@@ -226,7 +226,7 @@ namespace PX.Objects.SecondChances {
             var product = JsonConvert.DeserializeObject<ShopifyObj>(response.Content).product;
             if (product != null) {
                 var id = product.id;
-                var url = SecondChancesRestClient.BASE_URL + SecondChancesRestClient.ROUTE + product.handle;
+                var url = SecondChancesRestClient.BASE_URL + SecondChancesRestClient.ROUTE + '/' + product.handle;
                 doc.ListingID = id.ToString();
                 doc.ListingURL = url;
                 Document.Current = doc;
