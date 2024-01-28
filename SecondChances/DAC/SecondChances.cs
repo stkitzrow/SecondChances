@@ -159,6 +159,18 @@ namespace PX.Objects.SecondChances {
         public virtual int? ShipToSiteID { get; set; }
         #endregion
 
+        #region BranchID
+        public abstract class branchID : BqlInt.Field<branchID> { }
+        [GL.Branch(typeof(AccessInfo.branchID), IsDetail = false)]
+        //[PXFormula(typeof(Switch<Case<Where<POOrder.vendorLocationID, IsNotNull,
+        //            And<Selector<POOrder.vendorLocationID, Location.vBranchID>, IsNotNull>>,
+        //        Selector<POOrder.vendorLocationID, Location.vBranchID>,
+        //        Case<Where<Current2<POOrder.branchID>, IsNotNull>,
+        //            Current2<POOrder.branchID>>>,
+        //    Current<AccessInfo.branchID>>))]
+        public virtual int? BranchID { get; set; }
+        #endregion
+
         #region ShipToBAccountID
         public abstract class shipToBAccountID : BqlInt.Field<shipToBAccountID> { }
         [PXDBInt]

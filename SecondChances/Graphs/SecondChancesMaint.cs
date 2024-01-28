@@ -26,30 +26,58 @@ namespace PX.Objects.SecondChances {
             var row = e.Row;
             if (row == null) return;
             var cache = e.Cache;
+            PXUIFieldAttribute.SetEnabled<SecondChances.itemClassID>(cache, row, true);
+            PXUIFieldAttribute.SetEnabled<SecondChances.inventoryID>(cache, row, true);
+            PXUIFieldAttribute.SetEnabled<SecondChances.shipDestType>(cache, row, false);
+            PXUIFieldAttribute.SetEnabled<SecondChances.shipToBAccountID>(cache, row, false);
+            PXUIFieldAttribute.SetEnabled<SecondChances.shipToLocationID>(cache, row, false);
+            PXUIFieldAttribute.SetEnabled<SecondChances.shipToSiteID>(cache, row, false);
+            PXUIFieldAttribute.SetEnabled<SecondChances.listing>(cache, row, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.itemClassID>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.inventoryID>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.shipDestType>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.shipToBAccountID>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.shipToLocationID>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.shipToSiteID>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.listing>(cache, false);
             switch (row.Status) {
                 case DocumentStatus._New:
                     break;
                 case DocumentStatus.Under_Eval:
                     break;
                 case DocumentStatus.Recycle:
+                case DocumentStatus.Donate:
+                    PXUIFieldAttribute.SetEnabled<SecondChances.shipDestType>(cache, row, true);
+                    PXUIFieldAttribute.SetRequired<SecondChances.shipDestType>(cache, true);
                     break;
                 case DocumentStatus.Reuse:
+                    //PXUIFieldAttribute.SetEnabled<SecondChances.inventoryID>(cache, row, true);
+                    //PXUIFieldAttribute.SetEnabled<SecondChances.itemClassID>(cache, row, true);
+                    //PXUIFieldAttribute.SetRequired<SecondChances.listing>(cache, false);
+                    //PXUIFieldAttribute.SetRequired<SecondChances.listing>(cache, false);
                     break;
                 case DocumentStatus.Resell:
-                    break;
-                case DocumentStatus.Donate:
+                    PXUIFieldAttribute.SetEnabled<SecondChances.listing>(cache, row, true);
+                    PXUIFieldAttribute.SetRequired<SecondChances.listing>(cache, true);
                     break;
             }
-            var doc = e.Row;
-            if (doc == null) {
-                return;
+            switch (row.ShipDestType) {
+                case UpcyclingDestination.Site:
+                    PXUIFieldAttribute.SetEnabled<SecondChances.siteID>(cache, row, true);
+                    PXUIFieldAttribute.SetRequired<SecondChances.siteID>(cache, true);
+                    break;
+                case UpcyclingDestination.Vendor:
+                case UpcyclingDestination.Customer:
+                    PXUIFieldAttribute.SetEnabled<SecondChances.shipToBAccountID>(cache, row, true);
+                    PXUIFieldAttribute.SetEnabled<SecondChances.shipToLocationID>(cache, row, true);
+                    PXUIFieldAttribute.SetRequired<SecondChances.shipToBAccountID>(cache, true);
+                    PXUIFieldAttribute.SetRequired<SecondChances.shipToLocationID>(cache, true);
+                    break;
+                case UpcyclingDestination.CompanyLocation:
+                    PXUIFieldAttribute.SetEnabled<SecondChances.branchID>(cache, row, true);
+                    PXUIFieldAttribute.SetRequired<SecondChances.branchID>(cache, true);
+                    break;
             }
-            PXUIFieldAttribute.SetEnabled<SecondChances.shipToBAccountID>(cache, doc, doc.ShipDestType != POShippingDestination.CompanyLocation && IsShipToBAccountRequired(doc));
-            PXUIFieldAttribute.SetEnabled<SecondChances.shipToLocationID>(cache, doc, IsShipToBAccountRequired(doc));
-            PXUIFieldAttribute.SetEnabled<SecondChances.siteID>(cache, doc, (doc.ShipDestType == POShippingDestination.Site));
-            PXUIFieldAttribute.SetRequired<SecondChances.siteID>(cache, doc.ShipDestType == POShippingDestination.Site);
-            PXUIFieldAttribute.SetRequired<SecondChances.shipToBAccountID>(cache, IsShipToBAccountRequired(doc));
-            PXUIFieldAttribute.SetRequired<SecondChances.shipToLocationID>(cache, IsShipToBAccountRequired(doc));
         }
 
         protected virtual void _(Events.FieldUpdated<SecondChances, SecondChances.shipDestType> e) {
@@ -57,17 +85,17 @@ namespace PX.Objects.SecondChances {
             if (row == null) return;
             var cache = e.Cache;
             if (row.ShipDestType == POShippingDestination.Site) {
-                cache.SetDefaultExt<POOrder.siteID>(e.Row);
-                cache.SetValueExt<POOrder.shipToBAccountID>(e.Row, null);
-                cache.SetValueExt<POOrder.shipToLocationID>(e.Row, null);
+                cache.SetDefaultExt<SecondChances.siteID>(e.Row);
+                cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
+                cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
             } else if (row.ShipDestType == POShippingDestination.ProjectSite) {
-                cache.SetValueExt<POOrder.siteID>(e.Row, null);
-                cache.SetValueExt<POOrder.shipToBAccountID>(e.Row, null);
-                cache.SetValueExt<POOrder.shipToLocationID>(e.Row, null);
+                cache.SetValueExt<SecondChances.siteID>(e.Row, null);
+                cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
+                cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
             } else {
-                cache.SetValueExt<POOrder.siteID>(e.Row, null);
-                cache.SetDefaultExt<POOrder.shipToBAccountID>(e.Row);
-                cache.SetDefaultExt<POOrder.shipToLocationID>(e.Row);
+                cache.SetValueExt<SecondChances.siteID>(e.Row, null);
+                cache.SetDefaultExt<SecondChances.shipToBAccountID>(e.Row);
+                cache.SetDefaultExt<SecondChances.shipToLocationID>(e.Row);
             }
         }
 
@@ -77,18 +105,18 @@ namespace PX.Objects.SecondChances {
 
             if (row != null && row.ShipDestType == POShippingDestination.Site) {
                 try {
-                    POShipAddressAttribute.DefaultRecord<POOrder.shipAddressID>(cache, e.Row);
+                    POShipAddressAttribute.DefaultRecord<SecondChances.shipAddressID>(cache, e.Row);
                 } catch (SharedRecordMissingException) {
-                    cache.RaiseExceptionHandling<POOrder.siteID>(e.Row, cache.GetValueExt<POOrder.siteID>(e.Row),
+                    cache.RaiseExceptionHandling<SecondChances.siteID>(e.Row, cache.GetValueExt<SecondChances.siteID>(e.Row),
                         new PXSetPropertyException(PO.Messages.ShippingAddressMayNotBeEmpty, PXErrorLevel.Error));
-                    cache.SetValueExt<POOrder.shipAddressID>(e.Row, null);
+                    cache.SetValueExt<SecondChances.shipAddressID>(e.Row, null);
                 }
                 try {
-                    POShipContactAttribute.DefaultRecord<POOrder.shipContactID>(cache, e.Row);
+                    POShipContactAttribute.DefaultRecord<SecondChances.shipContactID>(cache, e.Row);
                 } catch (SharedRecordMissingException) {
-                    cache.RaiseExceptionHandling<POOrder.siteID>(e.Row, cache.GetValueExt<POOrder.siteID>(e.Row),
+                    cache.RaiseExceptionHandling<SecondChances.siteID>(e.Row, cache.GetValueExt<SecondChances.siteID>(e.Row),
                         new PXSetPropertyException(PO.Messages.ShippingContactMayNotBeEmpty, PXErrorLevel.Error));
-                    cache.SetValueExt<POOrder.shipContactID>(e.Row, null);
+                    cache.SetValueExt<SecondChances.shipContactID>(e.Row, null);
                 }
             }
         }
@@ -97,7 +125,7 @@ namespace PX.Objects.SecondChances {
             var row = e.Row;
             var cache = e.Cache;
             if (row != null) {
-                cache.SetDefaultExt<POOrder.shipToLocationID>(e.Row);
+                cache.SetDefaultExt<SecondChances.shipToLocationID>(e.Row);
             }
         }
 
@@ -106,15 +134,15 @@ namespace PX.Objects.SecondChances {
             var cache = e.Cache;
             if (row != null) {
                 try {
-                    POShipAddressAttribute.DefaultRecord<POOrder.shipAddressID>(cache, e.Row);
+                    POShipAddressAttribute.DefaultRecord<SecondChances.shipAddressID>(cache, e.Row);
                 } catch (SharedRecordMissingException) {
-                    cache.RaiseExceptionHandling<POOrder.siteID>(e.Row, cache.GetValueExt<POOrder.siteID>(e.Row),
+                    cache.RaiseExceptionHandling<SecondChances.siteID>(e.Row, cache.GetValueExt<SecondChances.siteID>(e.Row),
                         new PXSetPropertyException(PO.Messages.ShippingAddressMayNotBeEmpty, PXErrorLevel.Error));
                 }
                 try {
-                    POShipContactAttribute.DefaultRecord<POOrder.shipContactID>(cache, e.Row);
+                    POShipContactAttribute.DefaultRecord<SecondChances.shipContactID>(cache, e.Row);
                 } catch (SharedRecordMissingException) {
-                    cache.RaiseExceptionHandling<POOrder.siteID>(e.Row, cache.GetValueExt<POOrder.siteID>(e.Row),
+                    cache.RaiseExceptionHandling<SecondChances.siteID>(e.Row, cache.GetValueExt<SecondChances.siteID>(e.Row),
                         new PXSetPropertyException(PO.Messages.ShippingContactMayNotBeEmpty, PXErrorLevel.Error));
                 }
             }
