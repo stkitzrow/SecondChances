@@ -11,176 +11,55 @@
     <px:PXFormView ID="form" runat="server" DataSourceID="ds" Style="z-index: 100" Width="100%" DataMember="Document"
         CaptionVisible="False" TabIndex="100" ActivityIndicator="True" NoteIndicator="True" FilesIndicator="True" BPEventsIndicator="True" >
         <Template>
-            <px:PXLayoutRule runat="server" StartColumn="True">
-            </px:PXLayoutRule>
-            <px:PXSelector ID="edObjectID" runat="server" DataField="ObjectID" Size="s" TabIndex="101"/>
-			<px:PXDateTimeEdit ID="edExpenseDate" runat="server" DataField="ExpenseDate" CommitChanges="True"
-                TabIndex="102"/>
-			<px:PXSegmentMask ID="edInventoryID" runat="server" DataField="InventoryID" CommitChanges="True" AllowEdit="True"
-                TabIndex="103"/>
-            <px:PXLayoutRule runat="server" StartColumn="True">
-            </px:PXLayoutRule>
-			<px:PXSegmentMask CommitChanges="True" ID="edEmployeeID" runat="server" DataField="EmployeeID" DataSourceID="ds"
-                TabIndex="104"/>
-		<%--	<px:PXSegmentMask CommitChanges="True" ID="edBranchID" runat="server" DataField="BranchID" DataSourceID="ds"
-                TabIndex="105"/>--%>
-			<px:PXDropDown ID="PXDropDown1" runat="server" DataField="Status" Enabled="False" />
+            <px:PXSelector ID="edObjectID" runat="server" DataField="ObjectID" Size="s" TabIndex="101"></px:PXSelector>
+	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule8" StartRow="True" ></px:PXLayoutRule>
+	<px:PXTextEdit runat="server" ID="CstPXTextEdit5" DataField=".Descr" ></px:PXTextEdit>
             <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="150px">
             </px:PXLayoutRule>
-			<%--<px:PXNumberEdit ID="edCuryTranAmt" runat="server" DataField="CuryTranAmtWithTaxes" Enabled="False" />--%>
-			<%--<px:PXNumberEdit ID="PXNumberEdit2" runat="server" DataField="CuryTaxTotal" Enabled="False" />--%>
-            <px:PXLayoutRule runat="server" Merge="True"/>
-<%--            <px:PXNumberEdit ID="edClaimCuryTranAmtWithTaxes" runat="server" DataField="ClaimCuryTranAmtWithTaxes" Enabled="False" />
-            <px:PXTextEdit ID="edCardCuryID" runat="server" DataField="CardCuryID" SkinID="Label" SuppressLabel="True" Enabled="False"/>
-            <px:PXDropDown runat="server" ID="txtBankTranStatus"  DataField="BankTranStatus" Visible="False"/>--%>
-            <contentstyle borderstyle="None" />
-        </Template>
+	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule11" StartRow="True" />
+	<px:PXDropDown runat="server" ID="CstPXDropDown12" DataField="CurrentDocument.Status" /></Template>
     </px:PXFormView>
-</asp:Content>
-<%--<asp:Content ID="cont3" ContentPlaceHolderID="phG" runat="Server">
-    <px:PXTab ID="Tabs" runat="server" DataSourceID="ds" Style="z-index: 100" Width="100%" Height="100%" DataMember="CurrentClaimDetails" DefaultControlID="ExpenseDate">
-        <Items>
-            <px:PXTabItem Text="Details">
+	<px:PXTab runat="server" ID="MainTab">
+		<Items>
+			<px:PXTabItem Text="Pictures" >
                 <Template>
-                    <px:PXLayoutRule ID="PXLayoutRule2" runat="server" StartColumn="True" LabelsWidth="SM" ControlSize="XM" GroupCaption="Expense Details" />
-					<px:PXTextEdit ID="edTranDesc" runat="server" DataField="TranDesc" CommitChanges="True" TextMode="MultiLine" Width="365px" Height="96" TabIndex ="106"/>
-
-					<px:PXLayoutRule runat="server" Merge="True"/>
-							<px:PXNumberEdit ID="edQty" runat="server" DataField="Qty" CommitChanges="True" TabIndex ="107"/>
-							<px:PXSelector ID="edUOM" runat="server" DataField="UOM" CommitChanges="True" Size="S" TabIndex ="110"/>
-						<px:PXLayoutRule runat="server" />
-						<px:PXLayoutRule runat="server" Merge="True" />
-							<px:PXNumberEdit ID="edCuryUnitCost" runat="server" DataField="CuryUnitCost" CommitChanges="True" TabIndex ="108"/>
-							<px:PXNumberEdit ID="edCuryEmployeePart" runat="server" DataField="CuryEmployeePart" CommitChanges="True" TabIndex ="111"/>
-						<px:PXLayoutRule runat="server" />
-						<px:PXLayoutRule runat="server" Merge="True" />
-							<px:PXNumberEdit ID="edCuryExtCost" runat="server" DataField="CuryExtCost" CommitChanges="True" TabIndex ="109"/>
-							<px:PXNumberEdit ID="edCuryTipAmt" runat="server" DataField="CuryTipAmt" CommitChanges="True" TabIndex ="112"/>
-					<px:PXLayoutRule runat="server" />
-					
-					<pxa:PXCurrencyRate DataField="CuryID" ID="edCuryID" runat="server" DataSourceID="ds" RateTypeView="_EPExpenseClaimDetails_CurrencyInfo_" DataMember="CurrencyList" />
-					<px:PXTextEdit ID="edExpenseRefNbr" runat="server" DataField="ExpenseRefNbr" CommitChanges="True"/>
-					<px:PXSegmentMask CommitChanges="True" ID="edContract" runat="server" DataField="ContractID" Size="XM" />
-					<px:PXSegmentMask CommitChanges="True" ID="edTaskID" runat="server" DataField="TaskID" Size="XM" AutoRefresh="True" />
-					<px:PXSegmentMask CommitChanges="True" ID="edCostCodeID" runat="server" DataField="CostCodeID" Size="XM" AutoRefresh="True" />
-					<px:PXSelector CommitChanges="True" ID="edRefNbr" runat="server" DataField="RefNbr" AutoRefresh="True" AllowEdit="True"/>
-					<px:PXDropDown ID="PXStatusClaim" runat="server" DataField="StatusClaim" Enabled="False" />
-                    <px:PXDropDown runat="server" ID="edPaidWith" DataField="PaidWith" CommitChanges="True" />
-                    <px:PXSelector runat="server" ID="edCorpCardID" DataField="CorpCardID" CommitChanges="True" AutoRefresh="True"/>
-                    <px:PXLayoutRule ID="PXLayoutInfo" runat="server" StartGroup="True" GroupCaption="Expense Classification" LabelsWidth="SM" ControlSize="XM" />
-                    <px:PXCheckBox ID="PXHold" runat="server" DataField="Hold" Enabled="False" />
-                    <px:PXCheckBox ID="PXApproved" runat="server" DataField="Approved" Enabled="False" Visible="false"/>
-                    <px:PXCheckBox ID="PXCheckBox1" runat="server" DataField="Rejected" Enabled="False" Visible="false"/>
-                    <px:PXCheckBox ID="PXReleased" runat="server" DataField="Released" Enabled="False" />
-                    <px:PXCheckBox ID="PXClaimHold" runat="server" DataField="HoldClaim" Enabled="False" />
-                    
-					<px:PXLayoutRule ID="PXLayoutTax" runat="server" StartGroup="True" GroupCaption="Tax Info" />
-					<px:PXSelector ID="edTaxZoneID" runat="server" DataField="TaxZoneID" AutoRefresh="True" CommitChanges="True"/>
-					<px:PXDropDown ID="edTaxCalcMode" runat="server" DataField="TaxCalcMode"  CommitChanges="True"/>
-					<px:PXSelector ID="edTaxCategoryID" runat="server" DataField="TaxCategoryID" AutoRefresh="True" CommitChanges="True"/>
-
-                    <px:PXLayoutRule ID="PXLayoutService" runat="server" StartGroup="True" GroupCaption="Field Service Details"/>
-                    <px:PXDropDown ID="edFSEntityTypeUI" runat="server" DataField="FSEntityTypeUI"  CommitChanges="True"/>
-					<pxa:PXDynamicSelector ID="edFSEntityNoteID" runat="server" DataField="FSEntityNoteID" CommitChanges="True" AllowEdit="True" DisplayMode="Text" FilterByAllFields="True"/>
-                    <px:PXCheckBox ID="edFSBillable" runat="server" DataField="FSBillable" CommitChanges="True" />
-
-					<px:PXLayoutRule ID="PXLayoutFinencial" runat="server" StartGroup="True" GroupCaption="Financial Details" StartColumn="True" LabelsWidth="SM" ControlSize="XM"/>
-					<px:PXCheckBox ID="chkBillable" runat="server" DataField="Billable" CommitChanges="True" />
-					<px:PXSegmentMask CommitChanges="True" ID="edCustomerID" runat="server" DataField="ClaimDetails.CustomerID" AutoRefresh="True"/>
-                    <px:PXSegmentMask CommitChanges="True" ID="edCustomerLocationID" runat="server" DataField="ClaimDetails.CustomerLocationID" AutoRefresh="True" />
-                    <px:PXSegmentMask ID="edExpenseAccountID" runat="server" DataField="ExpenseAccountID" CommitChanges="true" />
-                    <px:PXSegmentMask ID="edExpenseSubID" runat="server" DataField="ExpenseSubID" AutoRefresh="True" />
-                    <px:PXSegmentMask ID="edSalesAccountID" runat="server" DataField="SalesAccountID" CommitChanges="true" />
-                    <px:PXSegmentMask ID="edSalesSubID" runat="server" DataField="SalesSubID" AutoRefresh="True" />
-
-					<px:PXLayoutRule ID="PXLayoutRule1" runat="server" GroupCaption="Image"/>
-					<px:PXImageUploader Width="395px" Height="275" ID="imgUploader" runat="server" AllowUpload="True" ViewOnly="True" ArrowsOutside="True" LabelText="&nbsp;" SuppressLabel="True"/>
+                    <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
+                    <px:PXImageUploader Height="320px" Width="430px" ID="imgUploader" runat="server" DataField="ImageUrl" AllowUpload="true" AllowNoImage="true" ShowComment="true" DataMember="CurrentDocument"
+						 />
+            </Template>
+            </px:PXTabItem>
+			<px:PXTabItem Text="Detail Description" >
+                <Template>
+                    <px:PXRichTextEdit ID="edBody" runat="server" DataField="Body" Style="border-width: 0px; border-top-width: 1px; width: 100%;"
+                        AllowAttached="true" AllowSearch="true" AllowLoadTemplate="false" AllowSourceMode="true">
+                        <AutoSize Enabled="True" MinHeight="216" />
+                    </px:PXRichTextEdit>
                 </Template>
             </px:PXTabItem>
-			<px:PXTabItem Text="Taxes">
+			<px:PXTabItem Text="General" >
 				<Template>
-                    <px:PXFormView runat="server" DataMember="CurrentClaimDetails" SkinID="Transparent" ID="TaxRoundDiffForm">
-                        <Template>
-                                <px:PXLayoutRule ID="PXLayoutRule232" runat="server" StartColumn="True" LabelsWidth="SM" ControlSize="XM"  />
-					            <px:PXNumberEdit ID="edTaxDiff" runat="server" DataField="CuryTaxRoundDiff" Enabled="false" />
-                         </Template>
-                    </px:PXFormView>
-					<px:PXGrid ID="grid1" runat="server" Height="100%"
-						Width="100%" ActionsPosition="Top" SkinID="Details" DataSourceID="ds"
-						TabIndex="3900">
-						<AutoSize Enabled="True" MinHeight="150" />
-						<LevelStyles>
-							<RowForm Width="300px">
-							</RowForm>
-						</LevelStyles>
-						<ActionBar>
-							<Actions>
-								<Search Enabled="False" />
-								<Save Enabled="False" />
-							</Actions>
-						</ActionBar>
-						<Levels>
-							<px:PXGridLevel DataMember="Taxes">
-								<Columns>
-									<px:PXGridColumn DataField="TaxID" CommitChanges="true"  />
-									<px:PXGridColumn DataField="TaxRate" TextAlign="Right" />
-									<px:PXGridColumn DataField="CuryTaxableAmt" TextAlign="Right" />
-									<px:PXGridColumn DataField="CuryTaxAmt" TextAlign="Right" />
-									<px:PXGridColumn DataField="NonDeductibleTaxRate" TextAlign="Right" />
-									<px:PXGridColumn DataField="CuryExpenseAmt" TextAlign="Right" />
-									<px:PXGridColumn DataField="Tax__TaxType"/>
-									<px:PXGridColumn DataField="Tax__PendingTax" TextAlign="Center" Type="CheckBox"/>
-									<px:PXGridColumn DataField="Tax__ReverseTax" TextAlign="Center" Type="CheckBox"/>
-									<px:PXGridColumn DataField="Tax__ExemptTax" TextAlign="Center" Type="CheckBox"/>
-									<px:PXGridColumn DataField="Tax__StatisticalTax" TextAlign="Center" Type="CheckBox"/>
-								</Columns>
-								<Layout FormViewHeight="" />
-                                <Mode AllowAddNew="false" AllowDelete="false" />
-							</px:PXGridLevel>
-						</Levels>
-                        <AutoSize Container="Window" Enabled="true" />
-					</px:PXGrid>
-				</Template>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule10" StartColumn="True" />
+                </Template>
 			</px:PXTabItem>
-            <px:PXTabItem Text="Banking" BindingContext="form" RepaintOnDemand="false" VisibleExp="DataControls[&quot;txtBankTranStatus&quot;].Value IsNotNull">
+			<px:PXTabItem Text="Attributes">
                 <Template>
-					<px:PXPanel ID="pnl1" runat="server" RenderSimple="True" RenderStyle="Simple">
-						<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="SM" ControlSize="XM"/>
-						<px:PXDropDown runat="server" ID="cmbBankTranStatus" DataField="BankTranStatus" Enabled="false"/>
-                        <px:PXTextEdit runat="server" ID="txtcategory" DataField="Category" Enabled="false" />
-					</px:PXPanel>
-				</Template>
-            </px:PXTabItem>
-            <px:PXTabItem Text="Approval Details" BindingContext="form" RepaintOnDemand="false">
-                <Template>
-                    <px:PXGrid ID="gridApproval" runat="server" DataSourceID="ds" Width="100%" SkinID="DetailsInTab" Style="left: 0px; top: 0px;">
-                        <AutoSize Enabled="True" />
-                        <Mode AllowAddNew="False" AllowDelete="False" AllowUpdate="False" />
+                    <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
+                    <px:PXGrid ID="PXGridAnswers" runat="server" Caption="Attributes" DataSourceID="ds" Height="150px" MatrixMode="True" Width="420px" SkinID="Attributes">
                         <Levels>
-                            <px:PXGridLevel DataMember="Approval">
+                            <px:PXGridLevel DataKeyNames="AttributeID,EntityType,EntityID" DataMember="Answers">
+                                <RowTemplate>
+                                    <px:PXLayoutRule runat="server" ControlSize="XM" LabelsWidth="M" StartColumn="True" />
+                                    <px:PXTextEdit ID="edParameterID" runat="server" DataField="AttributeID" Enabled="False" />
+                                    <px:PXTextEdit ID="edAnswerValue" runat="server" DataField="Value" />
+                                </RowTemplate>
                                 <Columns>
-                                    <px:PXGridColumn DataField="ApproverEmployee__AcctCD" />
-                                    <px:PXGridColumn DataField="ApproverEmployee__AcctName" />
-                                    <px:PXGridColumn DataField="WorkgroupID" />
-                                    <px:PXGridColumn DataField="ApprovedByEmployee__AcctCD" />
-                                    <px:PXGridColumn DataField="ApprovedByEmployee__AcctName" />
-                                    <px:PXGridColumn DataField="OrigOwnerID" Visible="false" SyncVisible="false" />
-                                    <px:PXGridColumn DataField="ApproveDate" />
-                                    <px:PXGridColumn DataField="Status" AllowNull="False" AllowUpdate="False" RenderEditorText="True" />
-                                    <px:PXGridColumn DataField="Reason" AllowUpdate="False" />
-                                    <px:PXGridColumn DataField="AssignmentMapID"  Visible="false" SyncVisible="false"/>
-                                    <px:PXGridColumn DataField="RuleID" Visible="false" SyncVisible="false" />
-                                    <px:PXGridColumn DataField="StepID" Visible="false" SyncVisible="false" />
-                                    <px:PXGridColumn DataField="CreatedDateTime" Visible="false" SyncVisible="false" />
+                                    <px:PXGridColumn AllowShowHide="False" DataField="AttributeID" TextField="AttributeID_description" TextAlign="Left" Width="135px" />
+                                    <px:PXGridColumn DataField="isRequired" TextAlign="Center" Type="CheckBox" Width="80px" />
+									<px:PXGridColumn DataField="AttributeCategory" Type="DropDownList" />
+                                    <px:PXGridColumn DataField="Value" Width="185px" />
                                 </Columns>
                             </px:PXGridLevel>
                         </Levels>
                     </px:PXGrid>
                 </Template>
-            </px:PXTabItem>
-        </Items>
-        <AutoSize Container="Window" Enabled="True" />
-    </px:PXTab>
-    <!--#include file="~\Pages\Includes\CRApprovalReasonPanel.inc"-->
-    <!--#include file="~\Pages\Includes\EPReassignApproval.inc"-->
-</asp:Content>--%>
+            </px:PXTabItem></Items></px:PXTab></asp:Content>
