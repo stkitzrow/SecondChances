@@ -19,12 +19,20 @@ namespace PX.Objects.SecondChances {
 
         #region ObjectID
         public abstract class objectID : BqlInt.Field<objectID> { }
-        [PXDBIdentity(IsKey = true)]
-        [PXUIField(DisplayName = "Object ID")]
-        [PXSelector(typeof(Search<SecondChances.objectID>),
-            DescriptionField = typeof(SecondChances.descr),
+        [PXDBIdentity]
+        [PXUIField(DisplayName = "Tracking ID")]
+        [PXSelector(typeof(Search<objectID>),
+            DescriptionField = typeof(descr),
+            SubstituteKey = typeof(objectCD),
             DirtyRead = true)]
         public virtual int? ObjectID { get; set; }
+        #endregion
+
+        #region ObjectCD
+        public abstract class objectCD : BqlString.Field<objectCD> { }
+        [PXDBString(30, IsUnicode = true, IsKey = true)]
+        [PXUIField(DisplayName = "Tracking ID")]
+        public virtual string ObjectCD { get; set; }
         #endregion
 
         #region Descr
@@ -232,8 +240,23 @@ namespace PX.Objects.SecondChances {
         public abstract class status : BqlString.Field<status> { }
         [PXUIField(DisplayName = "Status")]
         [DocumentStatus.List]
+        [PXDefault("N")]
         [PXDBString(1, IsFixed = true)]
         public virtual string Status { get; set; }
+        #endregion
+
+        #region ListingID
+        public abstract class listingID : BqlString.Field<listingID> { }
+        [PXDBString(128, IsUnicode = true)]
+        [PXUIField(DisplayName = "Listing ID")]
+        public virtual string ListingID { get; set; }
+        #endregion
+
+        #region ListingURL
+        public abstract class listingURL : BqlString.Field<listingURL> { }
+        [PXDBString(128, IsUnicode = true)]
+        [PXUIField(DisplayName = "Listing URL")]
+        public virtual string ListingURL { get; set; }
         #endregion
 
         #region NoteID 
