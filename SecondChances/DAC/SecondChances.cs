@@ -148,7 +148,7 @@ namespace PX.Objects.SecondChances {
         #region ShipDestType
         public abstract class shipDestType : BqlString.Field<shipDestType> { }
         [PXDBString(1, IsFixed = true)]
-        [POShippingDestination.List]
+        [UpcyclingDestination.List]
         [PXUIField(DisplayName = "Destination Type")]
         public virtual string ShipDestType { get; set; }
         #endregion
@@ -174,10 +174,10 @@ namespace PX.Objects.SecondChances {
                 GL.Branch.bAccountID, Equal<BAccount2.bAccountID>,
                 And<Match<GL.Branch, Current<AccessInfo.userName>>>>>>>,
             Where<
-                Vendor.bAccountID, IsNotNull, And<Optional<shipDestType>, Equal<POShippingDestination.vendor>,
+                Vendor.bAccountID, IsNotNull, And<Optional<shipDestType>, Equal<UpcyclingDestination.vendor>,
                     And2<Where<BAccount2.type, In3<BAccountType.vendorType, BAccountType.combinedType>>,
-            Or<Where<GL.Branch.bAccountID, IsNotNull, And<Optional<shipDestType>, Equal<POShippingDestination.company>,
-                Or<Where<AR.Customer.bAccountID, IsNotNull, And<Optional<shipDestType>, Equal<POShippingDestination.customer>>>>>>>>>>>),
+            Or<Where<GL.Branch.bAccountID, IsNotNull, And<Optional<shipDestType>, Equal<UpcyclingDestination.company>,
+                Or<Where<AR.Customer.bAccountID, IsNotNull, And<Optional<shipDestType>, Equal<UpcyclingDestination.customer>>>>>>>>>>>),
                 typeof(BAccount.acctCD), typeof(BAccount.acctName), typeof(BAccount.type), typeof(BAccount.acctReferenceNbr), typeof(BAccount.parentBAccountID),
             SubstituteKey = typeof(BAccount.acctCD), DescriptionField = typeof(BAccount.acctName), CacheGlobal = true)]
         [PXUIField(DisplayName = "Ship To")]
@@ -200,7 +200,7 @@ namespace PX.Objects.SecondChances {
         [POShipAddress(typeof(Select2<Address,
                     InnerJoin<CRLocation, On<Address.bAccountID, Equal<CRLocation.bAccountID>,
                         And<Address.addressID, Equal<CRLocation.defAddressID>,
-                        And<Current<shipDestType>, NotEqual<POShippingDestination.site>,
+                        And<Current<shipDestType>, NotEqual<UpcyclingDestination.site>,
                         And<CRLocation.bAccountID, Equal<Current<shipToBAccountID>>,
                         And<CRLocation.locationID, Equal<Current<shipToLocationID>>>>>>>,
                     LeftJoin<POShipAddress, On<POShipAddress.bAccountID, Equal<Address.bAccountID>,
@@ -218,7 +218,7 @@ namespace PX.Objects.SecondChances {
         [POShipContact(typeof(Select2<Contact,
                     InnerJoin<CRLocation, On<Contact.bAccountID, Equal<CRLocation.bAccountID>,
                         And<Contact.contactID, Equal<CRLocation.defContactID>,
-                        And<Current<shipDestType>, NotEqual<POShippingDestination.site>,
+                        And<Current<shipDestType>, NotEqual<UpcyclingDestination.site>,
                         And<CRLocation.bAccountID, Equal<Current<shipToBAccountID>>,
                         And<CRLocation.locationID, Equal<Current<shipToLocationID>>>>>>>,
                     LeftJoin<POShipContact, On<POShipContact.bAccountID, Equal<Contact.bAccountID>,
@@ -245,17 +245,25 @@ namespace PX.Objects.SecondChances {
         public virtual string Status { get; set; }
         #endregion
 
+        #region Listing
+        public abstract class listing : BqlString.Field<listing> { }
+        [PXUIField(DisplayName = "Listing")]
+        [DocumentStatus.List]
+        [PXDBString(1, IsFixed = true)]
+        public virtual string Listing { get; set; }
+        #endregion
+
         #region ListingID
         public abstract class listingID : BqlString.Field<listingID> { }
         [PXDBString(128, IsUnicode = true)]
-        [PXUIField(DisplayName = "Listing ID")]
+        [PXUIField(DisplayName = "Listing ID", IsReadOnly = true)]
         public virtual string ListingID { get; set; }
         #endregion
 
         #region ListingURL
         public abstract class listingURL : BqlString.Field<listingURL> { }
         [PXDBString(128, IsUnicode = true)]
-        [PXUIField(DisplayName = "Listing URL")]
+        [PXUIField(DisplayName = "Listing URL", IsReadOnly = true)]
         public virtual string ListingURL { get; set; }
         #endregion
 

@@ -6,6 +6,7 @@ using PX.Objects.CS;
 using PX.Objects.PO;
 using System;
 using System.Collections;
+using System.Linq;
 
 namespace PX.Objects.SecondChances {
     public class SecondChancesMaint : PXGraph<SecondChancesMaint, SecondChances> {
@@ -22,11 +23,27 @@ namespace PX.Objects.SecondChances {
         }
 
         protected virtual void _(Events.RowSelected<SecondChances> e) {
+            var row = e.Row;
+            if (row == null) return;
+            var cache = e.Cache;
+            switch (row.Status) {
+                case DocumentStatus._New:
+                    break;
+                case DocumentStatus.Under_Eval:
+                    break;
+                case DocumentStatus.Recycle:
+                    break;
+                case DocumentStatus.Reuse:
+                    break;
+                case DocumentStatus.Resell:
+                    break;
+                case DocumentStatus.Donate:
+                    break;
+            }
             var doc = e.Row;
             if (doc == null) {
                 return;
             }
-            var cache = e.Cache;
             PXUIFieldAttribute.SetEnabled<SecondChances.shipToBAccountID>(cache, doc, doc.ShipDestType != POShippingDestination.CompanyLocation && IsShipToBAccountRequired(doc));
             PXUIFieldAttribute.SetEnabled<SecondChances.shipToLocationID>(cache, doc, IsShipToBAccountRequired(doc));
             PXUIFieldAttribute.SetEnabled<SecondChances.siteID>(cache, doc, (doc.ShipDestType == POShippingDestination.Site));

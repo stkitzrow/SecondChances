@@ -74,8 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\SecondChancesRestClient.cs" />
+    <Compile Include="Attributes\Listing.cs" />
+    <Compile Include="Attributes\DocumentStatus.cs" />
+    <Compile Include="Attributes\UpcyclingDestination.cs" />
     <Compile Include="DAC\SecondChances.cs" />
-    <Compile Include="DocumentStatus.cs" />
     <Compile Include="Graphs\SecondChancesMaint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
