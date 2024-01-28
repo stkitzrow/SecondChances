@@ -260,7 +260,7 @@ namespace PX.Objects.SecondChances {
         #region Listing
         public abstract class listing : BqlString.Field<listing> { }
         [PXUIField(DisplayName = "Listing")]
-        [DocumentStatus.List]
+        [Listing.List]
         [PXDBString(1, IsFixed = true)]
         public virtual string Listing { get; set; }
         #endregion
