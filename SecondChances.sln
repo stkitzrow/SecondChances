@@ -8,6 +8,7 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SecondChances", "http://loc
 	ProjectSection(WebsiteProperties) = preProject
 		UseIISExpress = "false"
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		ProjectReferences = "{9bc6d61a-5d4b-4d57-bc6b-5e3f9d04377e}|PX.Objects.SecondChances.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/SecondChances"
 		Debug.AspNetCompiler.PhysicalPath = "D:\AcuSites\SecondChances\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SecondChances\"

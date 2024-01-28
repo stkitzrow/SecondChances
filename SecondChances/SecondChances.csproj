@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAC\SecondChances.cs" />
+    <Compile Include="DocumentStatus.cs" />
     <Compile Include="Graphs\SecondChancesMaint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

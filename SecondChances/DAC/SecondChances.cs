@@ -17,7 +17,11 @@ namespace PX.Objects.SecondChances {
         #region ObjectID
         public abstract class objectID : BqlInt.Field<objectID> { }
         [PXDBIdentity(IsKey = true)]
-        [PXUIField(DisplayName = "Chance ID")]
+        [PXUIField(DisplayName = "Object ID")]
+        [PXSelector(typeof(Search<SecondChances.objectID>/*, Where<>*/),
+            DescriptionField = typeof(SecondChances.descr),
+//            SubstituteKey = typeof(ALAnswer.name),
+            DirtyRead = true)]
         public virtual int? ObjectID { get; set; }
         #endregion
 
@@ -162,6 +166,14 @@ namespace PX.Objects.SecondChances {
         //[PXForeignReference(typeof(FK.InventoryItem))]
         //[ConvertedInventoryItem(typeof(isStockItem))]
         public virtual int? InventoryID { get; set; }
+        #endregion
+
+        #region Status
+        public abstract class status : BqlString.Field<status> { }
+        [PXUIField(DisplayName = "Status")]
+        [DocumentStatus.List]
+        [PXDBString(1, IsFixed = true)]
+        public virtual string Status { get; set; }
         #endregion
 
     }
