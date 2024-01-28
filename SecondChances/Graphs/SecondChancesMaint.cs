@@ -32,6 +32,7 @@ namespace PX.Objects.SecondChances {
             PXUIFieldAttribute.SetEnabled<SecondChances.shipToBAccountID>(cache, row, false);
             PXUIFieldAttribute.SetEnabled<SecondChances.shipToLocationID>(cache, row, false);
             PXUIFieldAttribute.SetEnabled<SecondChances.shipToSiteID>(cache, row, false);
+            PXUIFieldAttribute.SetEnabled<SecondChances.branchID>(cache, row, false);
             PXUIFieldAttribute.SetEnabled<SecondChances.listing>(cache, row, false);
             PXUIFieldAttribute.SetRequired<SecondChances.itemClassID>(cache, false);
             PXUIFieldAttribute.SetRequired<SecondChances.inventoryID>(cache, false);
@@ -39,6 +40,7 @@ namespace PX.Objects.SecondChances {
             PXUIFieldAttribute.SetRequired<SecondChances.shipToBAccountID>(cache, false);
             PXUIFieldAttribute.SetRequired<SecondChances.shipToLocationID>(cache, false);
             PXUIFieldAttribute.SetRequired<SecondChances.shipToSiteID>(cache, false);
+            PXUIFieldAttribute.SetRequired<SecondChances.branchID>(cache, false);
             PXUIFieldAttribute.SetRequired<SecondChances.listing>(cache, false);
             switch (row.Status) {
                 case DocumentStatus._New:
@@ -84,11 +86,11 @@ namespace PX.Objects.SecondChances {
             var row = e.Row;
             if (row == null) return;
             var cache = e.Cache;
-            if (row.ShipDestType == POShippingDestination.Site) {
+            if (row.ShipDestType == UpcyclingDestination.Site) {
                 cache.SetDefaultExt<SecondChances.siteID>(e.Row);
                 cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
                 cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
-            } else if (row.ShipDestType == POShippingDestination.ProjectSite) {
+            } else if (row.ShipDestType == UpcyclingDestination.ProjectSite) {
                 cache.SetValueExt<SecondChances.siteID>(e.Row, null);
                 cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
                 cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
@@ -99,11 +101,34 @@ namespace PX.Objects.SecondChances {
             }
         }
 
+        protected virtual void _(Events.FieldUpdated<SecondChances, SecondChances.status> e) {
+            var row = e.Row;
+            if (row == null) return;
+            var cache = e.Cache;
+            switch (row.Status) {
+                case DocumentStatus._New:
+                    break;
+                case DocumentStatus.Under_Eval:
+                    break;
+                case DocumentStatus.Recycle:
+                case DocumentStatus.Donate:
+                    break;
+                case DocumentStatus.Reuse:
+                case DocumentStatus.Resell:
+                    cache.SetDefaultExt<SecondChances.shipDestType>(e.Row);
+                    cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
+                    cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
+                    cache.SetValueExt<SecondChances.siteID>(e.Row, null);
+                    cache.SetValueExt<SecondChances.branchID>(e.Row, null);
+                    break;
+            }
+        }
+
         protected virtual void _(Events.FieldUpdated<SecondChances, SecondChances.siteID> e) {
             var row = e.Row;
             var cache = e.Cache;
 
-            if (row != null && row.ShipDestType == POShippingDestination.Site) {
+            if (row != null && row.ShipDestType == UpcyclingDestination.Site) {
                 try {
                     POShipAddressAttribute.DefaultRecord<SecondChances.shipAddressID>(cache, e.Row);
                 } catch (SharedRecordMissingException) {
@@ -217,7 +242,7 @@ namespace PX.Objects.SecondChances {
         }
 
         public virtual bool IsShipToBAccountRequired(SecondChances doc) {
-            return doc.ShipDestType.IsNotIn(POShippingDestination.Site, POShippingDestination.ProjectSite);
+            return doc.ShipDestType.IsNotIn(UpcyclingDestination.Site, UpcyclingDestination.ProjectSite);
         }
 
 

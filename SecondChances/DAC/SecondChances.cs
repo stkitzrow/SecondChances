@@ -117,14 +117,14 @@ namespace PX.Objects.SecondChances {
 
         #region SiteID
         public abstract class siteID : BqlInt.Field<siteID> { }
-        [SOSiteAvail(DisplayName = "Warehouse")]
+        [SOSiteAvail]
         [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual int? SiteID { get; set; }
         #endregion
 
         #region LocationID
         public abstract class locationID : BqlInt.Field<locationID> { }
-        [Location(typeof(siteID), DisplayName = "Location")]
+        [Location(typeof(siteID))]
         [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual int? LocationID { get; set; }
         #endregion
@@ -149,6 +149,7 @@ namespace PX.Objects.SecondChances {
         public abstract class shipDestType : BqlString.Field<shipDestType> { }
         [PXDBString(1, IsFixed = true)]
         [UpcyclingDestination.List]
+        [PXDefault(UpcyclingDestination.None)]
         [PXUIField(DisplayName = "Destination Type")]
         public virtual string ShipDestType { get; set; }
         #endregion
@@ -161,7 +162,7 @@ namespace PX.Objects.SecondChances {
 
         #region BranchID
         public abstract class branchID : BqlInt.Field<branchID> { }
-        [GL.Branch(typeof(AccessInfo.branchID), IsDetail = false)]
+        [GL.Branch(null, null, addDefaultAttribute: false, useDefaulting: false, IsDetail = false)]
         //[PXFormula(typeof(Switch<Case<Where<POOrder.vendorLocationID, IsNotNull,
         //            And<Selector<POOrder.vendorLocationID, Location.vBranchID>, IsNotNull>>,
         //        Selector<POOrder.vendorLocationID, Location.vBranchID>,
