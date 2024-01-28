@@ -87,17 +87,17 @@ namespace PX.Objects.SecondChances {
             if (row == null) return;
             var cache = e.Cache;
             if (row.ShipDestType == UpcyclingDestination.Site) {
-                cache.SetDefaultExt<SecondChances.siteID>(e.Row);
+                //cache.SetDefaultExt<SecondChances.siteID>(e.Row);
                 cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
                 cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
-            } else if (row.ShipDestType == UpcyclingDestination.ProjectSite) {
-                cache.SetValueExt<SecondChances.siteID>(e.Row, null);
-                cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
-                cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
+            //} else if (row.ShipDestType == UpcyclingDestination.ProjectSite) {
+            //    cache.SetValueExt<SecondChances.siteID>(e.Row, null);
+            //    cache.SetValueExt<SecondChances.shipToBAccountID>(e.Row, null);
+            //    cache.SetValueExt<SecondChances.shipToLocationID>(e.Row, null);
             } else {
                 cache.SetValueExt<SecondChances.siteID>(e.Row, null);
-                cache.SetDefaultExt<SecondChances.shipToBAccountID>(e.Row);
-                cache.SetDefaultExt<SecondChances.shipToLocationID>(e.Row);
+                //cache.SetDefaultExt<SecondChances.shipToBAccountID>(e.Row);
+                //cache.SetDefaultExt<SecondChances.shipToLocationID>(e.Row);
             }
         }
 
@@ -173,23 +173,23 @@ namespace PX.Objects.SecondChances {
             }
         }
 
-        protected virtual void _(Events.FieldVerifying<SecondChances, SecondChances.shipToLocationID> e) {
-            var row = e.Row;
-            var cache = e.Cache;
-            if (row != null && !IsShipToBAccountRequired(row)) {
-                e.Cancel = true;
-                e.NewValue = null;
-            }
-        }
+        //protected virtual void _(Events.FieldVerifying<SecondChances, SecondChances.shipToLocationID> e) {
+        //    var row = e.Row;
+        //    var cache = e.Cache;
+        //    if (row != null && !IsShipToBAccountRequired(row)) {
+        //        e.Cancel = true;
+        //        e.NewValue = null;
+        //    }
+        //}
 
-        protected virtual void _(Events.FieldVerifying<SecondChances, SecondChances.shipToBAccountID> e) {
-            var row = e.Row;
-            if (row == null) return;
-            if (!IsShipToBAccountRequired(row)) {
-                e.Cancel = true;
-                e.NewValue = null;
-            }
-        }
+        //protected virtual void _(Events.FieldVerifying<SecondChances, SecondChances.shipToBAccountID> e) {
+        //    var row = e.Row;
+        //    if (row == null) return;
+        //    if (!IsShipToBAccountRequired(row)) {
+        //        e.Cancel = true;
+        //        e.NewValue = null;
+        //    }
+        //}
 
         public PXAction<SecondChances> Action;
         [PXUIField(DisplayName = "Actions", MapEnableRights = PXCacheRights.Select)]
@@ -241,9 +241,9 @@ namespace PX.Objects.SecondChances {
             return bytes;
         }
 
-        public virtual bool IsShipToBAccountRequired(SecondChances doc) {
-            return doc.ShipDestType.IsNotIn(UpcyclingDestination.Site, UpcyclingDestination.ProjectSite);
-        }
+        //public virtual bool IsShipToBAccountRequired(SecondChances doc) {
+        //    return doc.ShipDestType.IsNotIn(UpcyclingDestination.Site, UpcyclingDestination.ProjectSite);
+        //}
 
 
         public class ShopifyObj {
