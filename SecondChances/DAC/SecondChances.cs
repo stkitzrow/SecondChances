@@ -117,14 +117,14 @@ namespace PX.Objects.SecondChances {
 
         #region SiteID
         public abstract class siteID : BqlInt.Field<siteID> { }
-        [SOSiteAvail]
+        [SOSiteAvail(DisplayName = "Current Warehouse")]
         [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual int? SiteID { get; set; }
         #endregion
 
         #region LocationID
         public abstract class locationID : BqlInt.Field<locationID> { }
-        [Location(typeof(siteID))]
+        [Location(typeof(siteID), DisplayName = "Current Location")]
         [PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
         public virtual int? LocationID { get; set; }
         #endregion
