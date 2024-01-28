@@ -11,56 +11,69 @@
     <px:PXFormView ID="form" runat="server" DataSourceID="ds" Style="z-index: 100" Width="100%" DataMember="Document"
         CaptionVisible="False" TabIndex="100" ActivityIndicator="True" NoteIndicator="True" FilesIndicator="True" BPEventsIndicator="True" >
         <Template>
-            <px:PXSelector ID="edObjectID" runat="server" DataField="ObjectID" Size="s" TabIndex="101"></px:PXSelector>
-	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule8" StartRow="True" ></px:PXLayoutRule>
-	<px:PXTextEdit runat="server" ID="CstPXTextEdit5" DataField=".Descr" ></px:PXTextEdit>
-            <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="150px">
-            </px:PXLayoutRule>
-	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule11" StartRow="True" />
-	<px:PXDropDown runat="server" ID="CstPXDropDown12" DataField="CurrentDocument.Status" /></Template>
+	<px:PXMaskEdit runat="server" ID="CstPXMaskEdit29" DataField="ObjectCD" ></px:PXMaskEdit>
+            <px:PXLayoutRule runat="server" ID="CstPXLayoutRule8" StartRow="True" ></px:PXLayoutRule>
+            <px:PXTextEdit Width="" runat="server" ID="CstPXTextEdit5" DataField="Descr" ></px:PXTextEdit>
+	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule11" StartRow="True" ></px:PXLayoutRule>
+	<px:PXDropDown CommitChanges="True" runat="server" ID="CstPXDropDown12" DataField="CurrentDocument.Status" ></px:PXDropDown>
+	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule24" StartRow="True" ></px:PXLayoutRule>
+	<px:PXSelector runat="server" ID="CstPXSelector25" DataField="WorkgroupID" ></px:PXSelector>
+	<px:PXSelector runat="server" ID="CstPXSelector33" DataField="OwnerID" ></px:PXSelector>
+	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule27" StartColumn="True" ></px:PXLayoutRule>
+	<px:PXTextEdit runat="server" ID="CstPXTextEdit26" DataField="WorkgroupID_description" ></px:PXTextEdit>
+	<px:PXTextEdit runat="server" ID="CstPXTextEdit34" DataField="OwnerID_description" ></px:PXTextEdit></Template>
     </px:PXFormView>
-	<px:PXTab runat="server" ID="MainTab">
+   <px:PXTab DataMember="CurrentDocument" runat="server" ID="MainTab">
 		<Items>
 			<px:PXTabItem Text="Pictures" >
                 <Template>
-                    <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
+                    <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" ></px:PXLayoutRule>
                     <px:PXImageUploader Height="320px" Width="430px" ID="imgUploader" runat="server" DataField="ImageUrl" AllowUpload="true" AllowNoImage="true" ShowComment="true" DataMember="CurrentDocument"
-						 />
+						 ></px:PXImageUploader>
             </Template>
             </px:PXTabItem>
-<%--			<px:PXTabItem Text="Detail Description" >
+			<px:PXTabItem Text="Detail Description" >
                 <Template>
                     <px:PXRichTextEdit ID="edBody" runat="server" DataField="Body" Style="border-width: 0px; border-top-width: 1px; width: 100%;"
                         AllowAttached="true" AllowSearch="true" AllowLoadTemplate="false" AllowSourceMode="true">
-                        <AutoSize Enabled="True" MinHeight="216" />
+                        <AutoSize Enabled="True" MinHeight="216" ></AutoSize>
                     </px:PXRichTextEdit>
                 </Template>
             </px:PXTabItem>
-			<px:PXTabItem Text="General" >
+            <px:PXTabItem Text="General" >
 				<Template>
-					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
-                    <px:PXDropDown runat="server" ID="CstPXDropDown12" DataField="CurrentDocument.Status" />
-                </Template>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule13" StartColumn="True" ></px:PXLayoutRule>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule22" StartGroup="True" GroupCaption="From Location" ></px:PXLayoutRule>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask4" DataField="CustomerID" ></px:PXSegmentMask>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask6" DataField="CustomerLocationID" ></px:PXSegmentMask>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule23" StartGroup="True" GroupCaption="Item Information" ></px:PXLayoutRule>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask8" DataField="ItemClassID" ></px:PXSegmentMask>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask7" DataField="InventoryID" ></px:PXSegmentMask>
+					<px:PXLayoutRule GroupCaption="Information" runat="server" ID="CstPXLayoutRule15" StartGroup="True" ></px:PXLayoutRule>
+					<px:PXDropDown CommitChanges="True" runat="server" ID="CstPXDropDown18" DataField="ShipDestType" ></px:PXDropDown>
+					<px:PXSelector runat="server" ID="CstPXSelector19" DataField="ShipToBAccountID" ></px:PXSelector>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask20" DataField="ShipToLocationID" ></px:PXSegmentMask>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask11" DataField="SiteID" ></px:PXSegmentMask>
+					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" ></px:PXLayoutRule>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule32" StartGroup="True" GroupCaption="Listing Information" ></px:PXLayoutRule>
+					<px:PXTextEdit runat="server" ID="CstPXTextEdit30" DataField="ListingID" ></px:PXTextEdit>
+					<px:PXTextEdit runat="server" ID="CstPXTextEdit31" DataField="ListingURL" ></px:PXTextEdit>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule14" StartColumn="True" ></px:PXLayoutRule></Template>
 			</px:PXTabItem>
 			<px:PXTabItem Text="Attributes">
-                <Template>
-                    <px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
-                    <px:PXGrid ID="PXGridAnswers" runat="server" Caption="Attributes" DataSourceID="ds" Height="150px" MatrixMode="True" Width="420px" SkinID="Attributes">
-                        <Levels>
-                            <px:PXGridLevel DataKeyNames="AttributeID,EntityType,EntityID" DataMember="Answers">
-                                <RowTemplate>
-                                    <px:PXLayoutRule runat="server" ControlSize="XM" LabelsWidth="M" StartColumn="True" />
-                                    <px:PXTextEdit ID="edParameterID" runat="server" DataField="AttributeID" Enabled="False" />
-                                    <px:PXTextEdit ID="edAnswerValue" runat="server" DataField="Value" />
-                                </RowTemplate>
-                                <Columns>
-                                    <px:PXGridColumn AllowShowHide="False" DataField="AttributeID" TextField="AttributeID_description" TextAlign="Left" Width="135px" />
-                                    <px:PXGridColumn DataField="isRequired" TextAlign="Center" Type="CheckBox" Width="80px" />
+				<Template>
+					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
+					<px:PXGrid runat="server" ID="PXGridAnswers" Height="150px" SkinID="Attributes" Width="420px" Caption="Attributes" MatrixMode="True" DataSourceID="ds">
+						<Levels>
+							<px:PXGridLevel DataMember="Answers" DataKeyNames="AttributeID,EntityType,EntityID">
+								<RowTemplate>
+									<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="M" ControlSize="XM" />
+									<px:PXTextEdit runat="server" ID="edParameterID" Enabled="False" DataField="AttributeID" />
+									<px:PXTextEdit runat="server" ID="edAnswerValue" DataField="Value" /></RowTemplate>
+								<Columns>
+									<px:PXGridColumn DataField="AttributeID" TextAlign="Left" TextField="AttributeID_description" Width="135px" AllowShowHide="False" />
+									<px:PXGridColumn DataField="isRequired" Type="CheckBox" TextAlign="Center" Width="80px" />
 									<px:PXGridColumn DataField="AttributeCategory" Type="DropDownList" />
-                                    <px:PXGridColumn DataField="Value" Width="185px" />
-                                </Columns>
-                            </px:PXGridLevel>
-                        </Levels>
-                    </px:PXGrid>
-                </Template>
-            </px:PXTabItem>--%></Items></px:PXTab></asp:Content>
+									<px:PXGridColumn DataField="Value" Width="185px" /></Columns></px:PXGridLevel></Levels></px:PXGrid></Template></px:PXTabItem></Items>
+            </px:PXTab>
+</asp:Content>
