@@ -1,4 +1,5 @@
 using PX.Data;
+using PX.Objects.CR;
 
 namespace PX.Objects.SecondChances {
     public class SecondChancesMaint : PXGraph<SecondChancesMaint, SecondChances> {
@@ -8,6 +9,8 @@ namespace PX.Objects.SecondChances {
 
         public PXSelect<SecondChances, Where<SecondChances.objectID, Equal<Current<SecondChances.objectID>>>> CurrentDocument;
 
+        public CRAttributeList<SecondChances> Answers;
+        
         public SecondChancesMaint() {
         }
 
