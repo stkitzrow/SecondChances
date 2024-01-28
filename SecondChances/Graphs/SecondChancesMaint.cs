@@ -140,17 +140,35 @@ namespace PX.Objects.SecondChances {
             return adapter.Get();
         }
 
+        public PXAction<SecondChances> receiveInventory;
+        [PXUIField(DisplayName = "Receive Inventory", MapEnableRights = PXCacheRights.Update, MapViewRights = PXCacheRights.Select)]
+        [PXButton]
+        public virtual IEnumerable ReceiveInventory(PXAdapter adapter) {
+            return adapter.Get();
+        }
+
         private void DoSend(SecondChances doc) {
             var client = new SecondChancesRestClient();
             var imgBytes = GetImageBytes(doc);
             var response = client.PostProductListing(doc.Descr, imgBytes).Result;
             var product = JsonConvert.DeserializeObject<ShopifyObj>(response.Content).product;
-            var id = product.id;
-            var url = SecondChancesRestClient.BASE_URL + SecondChancesRestClient.ROUTE + product.handle;
+            if (product != null) {
+                var id = product.id;
+                var url = SecondChancesRestClient.BASE_URL + SecondChancesRestClient.ROUTE + product.handle;
+                doc.ListingID = id.ToString();
+                doc.ListingURL = url;
+                Document.Current = doc;
+                Document.Cache.Update(doc);
+                Actions.PressSave();
+            }
         }
 
         private byte[] GetImageBytes(SecondChances doc) {
-            throw new NotImplementedException();
+            var cache = Caches[typeof(SecondChances)];
+            var fm = PXGraph.CreateInstance<PX.SM.UploadFileMaintenance>();
+            var files = PXNoteAttribute.GetFileNotes(cache, cache.Current);
+            var bytes = fm.GetFileWithNoData(files.FirstOrDefault())?.BinData ?? new byte[0];
+            return bytes;
         }
 
         public virtual bool IsShipToBAccountRequired(SecondChances doc) {
