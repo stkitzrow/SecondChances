@@ -3,6 +3,7 @@ using PX.Data;
 using PX.Objects.CR;
 using PX.Objects.CS;
 using PX.Objects.PO;
+using System.Collections;
 
 namespace PX.Objects.SecondChances {
     public class SecondChancesMaint : PXGraph<SecondChancesMaint, SecondChances> {
@@ -13,6 +14,10 @@ namespace PX.Objects.SecondChances {
         public PXSelect<SecondChances, Where<SecondChances.objectID, Equal<Current<SecondChances.objectID>>>> CurrentDocument;
 
         public CRAttributeList<SecondChances> Answers;
+
+        public SecondChancesMaint() {
+            Action.MenuAutoOpen = true;
+        }
 
         protected virtual void _(Events.RowSelected<SecondChances> e) {
             var doc = e.Row;
@@ -114,9 +119,30 @@ namespace PX.Objects.SecondChances {
             }
         }
 
+        public PXAction<SecondChances> Action;
+        [PXUIField(DisplayName = "Actions", MapEnableRights = PXCacheRights.Select)]
+        [PXButton(MenuAutoOpen = true)]
+        protected virtual IEnumerable action(PXAdapter adapter) {
+            return adapter.Get();
+        }
+
+        public PXAction<SecondChances> sendToListing;
+        [PXUIField(DisplayName = "Send To Listing Service", MapEnableRights = PXCacheRights.Update, MapViewRights = PXCacheRights.Select)]
+        [PXButton]
+        public virtual IEnumerable SendToListing(PXAdapter adapter) {
+            Save.Press();
+            var doc = Document.Current;
+            if (doc != null) {
+                DoSend(doc);
+            }
+            return adapter.Get();
+        }
+
+        private void DoSend(SecondChances doc) {
+        }
+
         public virtual bool IsShipToBAccountRequired(SecondChances doc) {
             return doc.ShipDestType.IsNotIn(POShippingDestination.Site, POShippingDestination.ProjectSite);
         }
-
     }
 }

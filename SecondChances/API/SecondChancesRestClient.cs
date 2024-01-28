@@ -1,30 +1,18 @@
 ﻿using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PX.Objects.SecondChances.API
-{
-    public class SecondChancesRestClient
-    {
-        public SecondChancesRestClient()
-        {
+namespace PX.Objects.SecondChances.API {
+    public class SecondChancesRestClient {
 
-        }
-
-        public async Task<RestResponse> PostProductListing() 
-        {
-            var product = new
-            {
-                product = new
-                {
-                    title = "Test Product Title",
-                    body_html = "<strong>Test product</strong>",
-                    vendor = "Second Chances",
-                    product_type = "Item Class",
-                }
+        public async Task<RestResponse> PostProductListing(string title, byte[] imgBytes) {
+            var img64 = GetBase64(imgBytes);
+            var product = new {
+                title,
+                body_html = "<strong>Test product</strong>",
+                vendor = "Second Chances",
+                product_type = "Item Class",
+                tags = new string[{ "Upcycling", "Second Chances", "Hackathon" }],
             };
             var client = new RestClient("https://acumaticaUpcycle.myshopify.com/admin/api/2024-01");
             var request = new RestRequest("/products.json");
@@ -33,6 +21,10 @@ namespace PX.Objects.SecondChances.API
             // execute the request
             RestResponse response = await client.PostAsync(request);
             return response;
+        }
+
+        private object GetBase64(byte[] imgBytes) {
+            throw new NotImplementedException();
         }
     }
 }
