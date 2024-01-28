@@ -1,7 +1,7 @@
 USE [SecondChances]
 GO
 
-/****** Object:  Table [dbo].[SecondChances]    Script Date: 2024-01-27 23:36:47 ******/
+/****** Object:  Table [dbo].[SecondChances]    Script Date: 2024-01-28 12:34:12 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -11,6 +11,7 @@ GO
 CREATE TABLE [dbo].[SecondChances](
 	[CompanyID] [int] NOT NULL,
 	[ObjectID] [int] IDENTITY(1,1) NOT NULL,
+	[ObjectCD] [nvarchar](30) NULL,
 	[InventoryID] [int] NULL,
 	[CustomerID] [int] NULL,
 	[CustomerLocationID] [int] NULL,
@@ -31,6 +32,8 @@ CREATE TABLE [dbo].[SecondChances](
 	[ShipToLocationID] [int] NULL,
 	[ShipAddressID] [int] NULL,
 	[ShipContactID] [int] NULL,
+	[ListingID] [nvarchar](128) NULL,
+	[ListingURL] [nvarchar](128) NULL,
 	[NoteID] [uniqueidentifier] NOT NULL,
 	[CreatedByID] [uniqueidentifier] NOT NULL,
 	[CreatedByScreenID] [char](8) NOT NULL,
