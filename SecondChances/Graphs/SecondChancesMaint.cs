@@ -3,6 +3,7 @@ using PX.Common;
 using PX.Data;
 using PX.Objects.CR;
 using PX.Objects.CS;
+using PX.Objects.IN;
 using PX.Objects.PO;
 using System;
 using System.Collections;
@@ -220,7 +221,8 @@ namespace PX.Objects.SecondChances {
         private void DoSend(SecondChances doc) {
             var client = new SecondChancesRestClient();
             var imgBytes = GetImageBytes(doc);
-            var response = client.PostProductListing(doc.Descr, imgBytes).Result;
+            var itemClass = INItemClass.PK.Find(this, doc.ItemClassID);
+            var response = client.PostProductListing(doc.Descr, doc.Body, itemClass?.Descr, imgBytes);
             var product = JsonConvert.DeserializeObject<ShopifyObj>(response.Content).product;
             if (product != null) {
                 var id = product.id;
@@ -237,7 +239,7 @@ namespace PX.Objects.SecondChances {
             var cache = Caches[typeof(SecondChances)];
             var fm = PXGraph.CreateInstance<PX.SM.UploadFileMaintenance>();
             var files = PXNoteAttribute.GetFileNotes(cache, cache.Current);
-            var bytes = fm.GetFileWithNoData(files.FirstOrDefault())?.BinData ?? new byte[0];
+            var bytes = fm.GetFile(files.FirstOrDefault())?.BinData ?? new byte[0];
             return bytes;
         }
 

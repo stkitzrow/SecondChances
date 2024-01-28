@@ -129,22 +129,6 @@ namespace PX.Objects.SecondChances {
         public virtual int? LocationID { get; set; }
         #endregion
 
-        //#region BAccountID
-        //public abstract class bAccountID : BqlInt.Field<bAccountID> { }
-        //[PXDBInt]
-        //[PXUIField(DisplayName = "Business Account")]
-        //[PXSelector(typeof(Search<BAccountR.bAccountID>), SubstituteKey = typeof(BAccountR.acctCD), DescriptionField = typeof(BAccountR.acctName))]
-        //public virtual int? BAccountID { get; set; }
-        //#endregion
-
-        //#region ContactID
-        //public abstract class contactID : BqlInt.Field<contactID> { }
-        //[ContactRaw()]
-        //[PXDefault(PersistingCheck = PXPersistingCheck.Nothing)]
-        ////[PXUIEnabled(typeof(Where<SOOrder.customerID, IsNotNull>))]
-        //public virtual int? ContactID { get; set; }
-        //#endregion
-
         #region ShipDestType
         public abstract class shipDestType : BqlString.Field<shipDestType> { }
         [PXDBString(1, IsFixed = true)]
@@ -200,9 +184,9 @@ namespace PX.Objects.SecondChances {
         #region ShipToLocationID
         public abstract class shipToLocationID : PX.Data.BQL.BqlInt.Field<shipToLocationID> { }
         [LocationActive(typeof(Where<Location.bAccountID, Equal<Current<shipToBAccountID>>>), DescriptionField = typeof(Location.descr))]
-        [PXDefault(null,
-            typeof(Search<BAccount2.defLocationID,
-                    Where<BAccount2.bAccountID, Equal<Optional<shipToBAccountID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
+        //[PXDefault(null,
+        //    typeof(Search<BAccount2.defLocationID,
+        //            Where<BAccount2.bAccountID, Equal<Optional<shipToBAccountID>>>>), PersistingCheck = PXPersistingCheck.Nothing)]
         [PXUIField(DisplayName = "Shipping Location")]
         public virtual int? ShipToLocationID { get; set; }
         #endregion
