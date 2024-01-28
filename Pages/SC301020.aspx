@@ -28,7 +28,7 @@
 						 />
             </Template>
             </px:PXTabItem>
-			<px:PXTabItem Text="Detail Description" >
+<%--			<px:PXTabItem Text="Detail Description" >
                 <Template>
                     <px:PXRichTextEdit ID="edBody" runat="server" DataField="Body" Style="border-width: 0px; border-top-width: 1px; width: 100%;"
                         AllowAttached="true" AllowSearch="true" AllowLoadTemplate="false" AllowSourceMode="true">
@@ -38,7 +38,8 @@
             </px:PXTabItem>
 			<px:PXTabItem Text="General" >
 				<Template>
-					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule10" StartColumn="True" />
+					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" />
+                    <px:PXDropDown runat="server" ID="CstPXDropDown12" DataField="CurrentDocument.Status" />
                 </Template>
 			</px:PXTabItem>
 			<px:PXTabItem Text="Attributes">
@@ -62,4 +63,4 @@
                         </Levels>
                     </px:PXGrid>
                 </Template>
-            </px:PXTabItem></Items></px:PXTab></asp:Content>
+            </px:PXTabItem>--%></Items></px:PXTab></asp:Content>
