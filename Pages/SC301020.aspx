@@ -11,7 +11,8 @@
     <px:PXFormView ID="form" runat="server" DataSourceID="ds" Style="z-index: 100" Width="100%" DataMember="Document"
         CaptionVisible="False" TabIndex="100" ActivityIndicator="True" NoteIndicator="True" FilesIndicator="True" BPEventsIndicator="True" >
         <Template>
-	<px:PXMaskEdit runat="server" ID="CstPXMaskEdit29" DataField="ObjectCD" ></px:PXMaskEdit>
+	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule55" StartRow="True" />
+	<px:PXTextEdit runat="server" DataField="ObjectCD" ID="CstPXMaskEdit29" />
             <px:PXLayoutRule runat="server" ID="CstPXLayoutRule8" StartRow="True" ></px:PXLayoutRule>
             <px:PXTextEdit Width="" runat="server" ID="CstPXTextEdit5" DataField="Descr" ></px:PXTextEdit>
 	<px:PXLayoutRule runat="server" ID="CstPXLayoutRule11" StartRow="True" ></px:PXLayoutRule>
@@ -51,11 +52,16 @@
 					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask7" DataField="InventoryID" ></px:PXSegmentMask>
 					<px:PXLayoutRule GroupCaption="Information" runat="server" ID="CstPXLayoutRule15" StartGroup="True" ></px:PXLayoutRule>
 					<px:PXDropDown CommitChanges="True" runat="server" ID="CstPXDropDown18" DataField="ShipDestType" ></px:PXDropDown>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask37" DataField="BranchID" ></px:PXSegmentMask>
 					<px:PXSelector runat="server" ID="CstPXSelector19" DataField="ShipToBAccountID" ></px:PXSelector>
 					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask20" DataField="ShipToLocationID" ></px:PXSegmentMask>
-					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask11" DataField="SiteID" ></px:PXSegmentMask>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask36" DataField="ShipToSiteID" ></px:PXSegmentMask>
 					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" ></px:PXLayoutRule>
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule38" StartGroup="True" GroupCaption="Current Information" />
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask40" DataField="SiteID" />
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask39" DataField="LocationID" />
 					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule32" StartGroup="True" GroupCaption="Listing Information" ></px:PXLayoutRule>
+					<px:PXDropDown runat="server" ID="CstPXDropDown35" DataField="Listing" ></px:PXDropDown>
 					<px:PXTextEdit runat="server" ID="CstPXTextEdit30" DataField="ListingID" ></px:PXTextEdit>
 					<px:PXTextEdit runat="server" ID="CstPXTextEdit31" DataField="ListingURL" ></px:PXTextEdit>
 					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule14" StartColumn="True" ></px:PXLayoutRule></Template>
