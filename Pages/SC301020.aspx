@@ -57,13 +57,13 @@
 					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask20" DataField="ShipToLocationID" ></px:PXSegmentMask>
 					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask36" DataField="ShipToSiteID" ></px:PXSegmentMask>
 					<px:PXLayoutRule runat="server" StartColumn="True" LabelsWidth="S" ControlSize="XM" ></px:PXLayoutRule>
-					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule38" StartGroup="True" GroupCaption="Current Information" />
-					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask40" DataField="SiteID" />
-					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask39" DataField="LocationID" />
+					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule38" StartGroup="True" GroupCaption="Current Information" ></px:PXLayoutRule>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask40" DataField="SiteID" ></px:PXSegmentMask>
+					<px:PXSegmentMask runat="server" ID="CstPXSegmentMask39" DataField="LocationID" ></px:PXSegmentMask>
 					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule32" StartGroup="True" GroupCaption="Listing Information" ></px:PXLayoutRule>
 					<px:PXDropDown runat="server" ID="CstPXDropDown35" DataField="Listing" ></px:PXDropDown>
 					<px:PXTextEdit runat="server" ID="CstPXTextEdit30" DataField="ListingID" ></px:PXTextEdit>
-					<px:PXTextEdit runat="server" ID="CstPXTextEdit31" DataField="ListingURL" ></px:PXTextEdit>
+					<px:PXLinkEdit runat="server" ID="CstPXTextEdit31" DataField="ListingURL" />
 					<px:PXLayoutRule runat="server" ID="CstPXLayoutRule14" StartColumn="True" ></px:PXLayoutRule></Template>
 			</px:PXTabItem>
 			<px:PXTabItem Text="Attributes">
